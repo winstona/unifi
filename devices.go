@@ -59,9 +59,12 @@ type Radio struct {
 
 // RadioStationsStats contains Station statistics for a Radio.
 type RadioStationsStats struct {
-	NumberStations      int
-	NumberGuestStations int
-	NumberUserStations  int
+	NumberStations             int
+	NumberGuestStations        int
+	NumberUserStations         int
+	ChannelUtilizationTotal    int
+	ChannelUtilizationTransmit int
+	ChannelUtilizationReceived int
 }
 
 // A NIC is a wired ethernet network interface, attached to a Device.
@@ -159,9 +162,12 @@ func (d *Device) UnmarshalJSON(b []byte) error {
 		for _, v := range dev.RadioTableStats {
 			if v.Name == rt.Name {
 				r.Stats = &RadioStationsStats{
-					NumberStations:      v.NumSta,
-					NumberUserStations:  v.UserNumSta,
-					NumberGuestStations: v.GuestNumSta,
+					NumberStations:             v.NumSta,
+					NumberUserStations:         v.UserNumSta,
+					NumberGuestStations:        v.GuestNumSta,
+					ChannelUtilizationTotal:    v.CuTotal,
+					ChannelUtilizationTransmit: v.CuSelfTx,
+					ChannelUtilizationReceived: v.CuSelfRx,
 				}
 			}
 		}
