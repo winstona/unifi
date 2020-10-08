@@ -43,6 +43,7 @@ type Station struct {
 	Name            string // Unifi-set name
 	Noise           int
 	RSSI            int
+	Satisfaction    int
 	SiteID          string
 	Stats           *StationStats
 	Uptime          time.Duration
@@ -93,6 +94,7 @@ func (s *Station) UnmarshalJSON(b []byte) error {
 		Noise:           sta.Noise,
 		RSSI:            sta.RSSI,
 		RoamCount:       sta.RoamCount,
+		Satisfaction:    sta.Satisfaction,
 		SiteID:          sta.SiteID,
 		Stats: &StationStats{
 			ReceiveBytes:    sta.RxBytes,
@@ -147,6 +149,7 @@ type station struct {
 	RxBytesR         int64  `json:"rx_bytes-r"`
 	RxPackets        int64  `json:"rx_packets"`
 	RxRate           int    `json:"rx_rate"`
+	Satisfaction     int    `json:"satisfaction"`
 	Signal           int    `json:"signal"`
 	SiteID           string `json:"site_id"`
 	TxBytes          int64  `json:"tx_bytes"`
